@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+/* =========================================
+   基本設定（明朝体・背景色）
+   ========================================= */
+body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 20px 0;
+    background-color: #f5f5f5; /* 背景：薄いグレー */
+}
+
+a {
+    color: #003366; /* 濃紺 */
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   レイアウト枠組み
+   ========================================= */
+.academic-wrapper {
+    width: 960px; /* 固定幅 */
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* フレックスボックスで横並びを実現 */
+.academic-container {
+    display: flex;
+    align-items: stretch; /* 高さを揃える */
+    border-top: 1px solid #ccc; /* ヘッダーとの境界線 */
+}
+
+/* =========================================
+   ヘッダー
+   ========================================= */
+.academic-header {
+    padding: 25px 30px;
+    background-color: #fff;
+    border-bottom: 4px solid #003366; /* 学術系濃紺ライン */
+}
+.academic-header h1 {
+    font-size: 26px;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+.academic-header .subtitle {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #666;
+    margin-top: 5px;
+    letter-spacing: 0.05em;
+}
+
+/* =========================================
+   サイドバー（左メニュー）
+   ========================================= */
+.academic-sidebar {
+    width: 230px; /* 幅を固定 */
+    flex-shrink: 0;
+    background-color: #f0f0f0;
+    border-right: 1px solid #999; /* 境界線をくっきり */
+    padding: 20px;
+    font-size: 12px; /* 文字サイズ極小 */
+    box-sizing: border-box;
+}
+
+.academic-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.academic-sidebar > ul > li {
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+.academic-sidebar ul ul {
+    margin-top: 4px;
+    padding-left: 10px;
+}
+.academic-sidebar ul ul li {
+    font-weight: normal;
+    border-bottom: none;
+    margin-bottom: 3px;
+    font-size: 11px; /* 小項目はさらに小さく */
+    color: #444;
+}
+.academic-sidebar .pending {
+    color: #aaa;
+}
+
+/* =========================================
+   メインコンテンツ
+   ========================================= */
+.academic-main {
+    flex: 1; /* 残りの幅を埋める */
+    padding: 40px;
+    background-color: #fff;
+    min-height: 500px;
+    box-sizing: border-box;
+}
+
+.academic-main section {
+    margin-bottom: 50px;
+}
+
+/* 見出し */
+.academic-main h2 {
+    font-size: 18px;
+    border-left: 6px solid #003366;
+    padding-left: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* ニュースリスト（表組み風） */
+.news-list {
+    margin: 0;
+}
+.news-list dt {
+    float: left;
+    clear: left;
+    width: 120px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.news-list dd {
+    margin-left: 120px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dotted #ccc;
+}
+/* float解除 */
+.news-list::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 文書用スタイル（設立趣意書など） */
+.document-title {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+.document-body p {
+    margin-bottom: 1.5em;
+    text-align: justify; /* 両端揃え */
+    line-height: 1.9;
+}
+.document-date {
+    text-align: right;
+    margin-top: 50px;
+}
+.document-sign {
+    text-align: right;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* =========================================
+   フッター
+   ========================================= */
+.academic-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-size: 11px;
+}
