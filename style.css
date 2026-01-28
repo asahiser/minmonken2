@@ -9,12 +9,12 @@ body {
     line-height: 1.6;
     color: #333;
     margin: 0;
-    padding: 20px 0;
-    background-color: #f5f5f5; /* 背景：薄いグレー */
+    padding: 0; /* スマホ用に余白調整 */
+    background-color: #f5f5f5;
 }
 
 a {
-    color: #003366; /* 濃紺 */
+    color: #003366;
     text-decoration: none;
 }
 a:hover {
@@ -22,21 +22,32 @@ a:hover {
 }
 
 /* =========================================
-   レイアウト枠組み
+   レイアウト枠組み（レスポンシブ対応）
    ========================================= */
 .academic-wrapper {
-    width: 960px; /* 固定幅 */
-    margin: 0 auto;
+    width: 100%;             /* スマホ用に100% */
+    max-width: 960px;        /* PCでは最大960px */
+    margin: 20px auto;       /* 上下左右中央 */
     background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    box-sizing: border-box;  /* パディングを含めた幅計算 */
+}
+
+/* スマホでは画面いっぱいに広げる */
+@media (max-width: 768px) {
+    .academic-wrapper {
+        margin: 0;
+        border: none;
+        box-shadow: none;
+    }
 }
 
 /* フレックスボックスで横並びを実現 */
 .academic-container {
     display: flex;
-    align-items: stretch; /* 高さを揃える */
-    border-top: 1px solid #ccc; /* ヘッダーとの境界線 */
+    align-items: stretch; /* 高さを揃える（尻切れ防止の肝） */
+    border-top: 1px solid #ccc;
 }
 
 /* =========================================
@@ -45,7 +56,7 @@ a:hover {
 .academic-header {
     padding: 25px 30px;
     background-color: #fff;
-    border-bottom: 4px solid #003366; /* 学術系濃紺ライン */
+    border-bottom: 4px solid #003366;
 }
 .academic-header h1 {
     font-size: 26px;
@@ -61,16 +72,31 @@ a:hover {
     letter-spacing: 0.05em;
 }
 
+/* スマホ用ヘッダー調整 */
+@media (max-width: 768px) {
+    .academic-header {
+        padding: 15px 20px;
+    }
+    .academic-header h1 {
+        font-size: 20px;
+    }
+}
+
 /* =========================================
-   サイドバー（左メニュー）
+   サイドバー（★修正箇所：尻切れ防止）
    ========================================= */
+/* JavaScriptで読み込むための「箱」(#sidebar-part)にスタイルを適用します */
+#sidebar-part {
+    width: 230px;            /* 幅を固定 */
+    flex-shrink: 0;          /* 縮まないようにする */
+    background-color: #f0f0f0; /* ★背景色をここに移動（これで下まで伸びます） */
+    border-right: 1px solid #999; /* ★境界線もここに移動 */
+}
+
+/* 中身のnavタグのスタイル */
 .academic-sidebar {
-    width: 230px; /* 幅を固定 */
-    flex-shrink: 0;
-    background-color: #f0f0f0;
-    border-right: 1px solid #999; /* 境界線をくっきり */
     padding: 20px;
-    font-size: 12px; /* 文字サイズ極小 */
+    font-size: 12px;
     box-sizing: border-box;
 }
 
@@ -93,7 +119,7 @@ a:hover {
     font-weight: normal;
     border-bottom: none;
     margin-bottom: 3px;
-    font-size: 11px; /* 小項目はさらに小さく */
+    font-size: 11px;
     color: #444;
 }
 .academic-sidebar .pending {
@@ -107,15 +133,15 @@ a:hover {
     flex: 1; /* 残りの幅を埋める */
     padding: 40px;
     background-color: #fff;
-    min-height: 500px;
+    min-height: 500px; /* 最低限の高さを確保 */
     box-sizing: border-box;
+    overflow-x: hidden; /* はみ出し防止 */
 }
 
 .academic-main section {
     margin-bottom: 50px;
 }
 
-/* 見出し */
 .academic-main h2 {
     font-size: 18px;
     border-left: 6px solid #003366;
@@ -127,9 +153,6 @@ a:hover {
 }
 
 /* ニュースリスト（表組み風） */
-.news-list {
-    margin: 0;
-}
 .news-list dt {
     float: left;
     clear: left;
@@ -150,7 +173,7 @@ a:hover {
     clear: both;
 }
 
-/* 文書用スタイル（設立趣意書など） */
+/* 文書用スタイル */
 .document-title {
     font-size: 22px;
     text-align: center;
@@ -160,7 +183,7 @@ a:hover {
 }
 .document-body p {
     margin-bottom: 1.5em;
-    text-align: justify; /* 両端揃え */
+    text-align: justify;
     line-height: 1.9;
 }
 .document-date {
@@ -182,4 +205,51 @@ a:hover {
     padding: 15px;
     text-align: center;
     font-size: 11px;
+}
+
+/* =========================================
+   ★スマホ対応（レスポンシブ）設定
+   ========================================= */
+@media (max-width: 768px) {
+    /* 1. コンテナを縦並びにする */
+    .academic-container {
+        display: block; /* Flex解除 */
+    }
+
+    /* 2. サイドバーを横幅いっぱいにし、メインの下（または上）に配置 */
+    #sidebar-part {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #999;
+        /* 背景色はそのまま */
+    }
+    
+    /* サイドバーの中身を少し見やすくする */
+    .academic-sidebar {
+        padding: 15px 20px;
+    }
+
+    /* 3. メインコンテンツの余白を減らす */
+    .academic-main {
+        padding: 20px;
+        min-height: auto; /* 高さはなりゆきで */
+    }
+
+    /* 文書のタイトルを少し小さく */
+    .document-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    /* ニュースリストの崩れ防止（縦並びへ） */
+    .news-list dt {
+        float: none;
+        width: 100%;
+        margin-bottom: 2px;
+    }
+    .news-list dd {
+        margin-left: 0;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
 }
